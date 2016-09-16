@@ -59,7 +59,9 @@ namespace Serilog.Sinks.EventLog
 	        if (string.IsNullOrWhiteSpace(_logName))
 	            _logName = APPLICATION_LOG;
 
-	        _log = new System.Diagnostics.EventLog(_logName);
+            _log = machineName == null ?
+                new System.Diagnostics.EventLog(_logName) :
+                new System.Diagnostics.EventLog(_logName, machineName);
 
 	        if (manageEventSource)
 	        {
